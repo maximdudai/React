@@ -1,16 +1,17 @@
 import React from "react";
-import '../../App.css'
+import '../../App.css';
 
-const SearchProfile = (profileName) => {
+const SearchProfile = ({searchField, searchChange}) => {
     return (
-        <div className="searchProfilName mt-16">
+        <div>
             <input 
-                className="bg-slate-700 p-2 text-white rounded text-lg focus:outline-none"
-                placeholder="profile name ..."
+                className="rounded bg-slate-700 p-2 text-base mt-3 text-white focus:border-none"
                 type={'search'}
-                onChange={profileName}
+                placeholder={'Profile ..'}
+                onChange={searchChange}
             />
         </div>
     )
+
 };
 export default SearchProfile;

@@ -1,12 +1,9 @@
 import React from "react";
 
-const DisplayProfile = () => {
+const DisplayProfile = ({name, id, Followers, Following, since, twitter, location, company}) => {
+
 
     const profileClassName = 'bg-slate-600 p-2 rounded';
-
-    const twitter = false;
-    const location = false;
-    const company = false;
 
     return (
         // https://avatars.githubusercontent.com/u/108686152?v=4
@@ -23,70 +20,70 @@ const DisplayProfile = () => {
             <div className="userProfileContent p-3 w-full">
                 <div className={`${profileClassName} flex flex-row justify-between w-full text-lg`}>
                     <div className="userItem">Name</div>
-                    <div className="userContent">Maxim Dudai</div>
+                    <div className="userContent">{name}</div>
                 </div>
             </div>
 
             <div className="userProfileContent p-3 w-full">
                 <div className={`${profileClassName} flex flex-row justify-between w-full text-lg`}>
                     <div className="userItem">ID</div>
-                    <div className="userContent">108686152</div>
+                    <div className="userContent">{id}</div>
                 </div>
             </div>
 
             <div className="userProfileContent p-3 w-full">
                 <div className={`${profileClassName} flex flex-row justify-between w-full text-lg`}>
                     <div className="userItem">Followers</div>
-                    <div className="userContent">0</div>
+                    <div className="userContent">{Followers}</div>
                 </div>
             </div>
 
             <div className="userProfileContent p-3 w-full">
                 <div className={`${profileClassName} flex flex-row justify-between w-full text-lg`}>
                     <div className="userItem">Following</div>
-                    <div className="userContent">0</div>
+                    <div className="userContent">{Following}</div>
                 </div>
             </div>
 
             <div className="userProfileContent p-3 w-full">
                 <div className={`${profileClassName} flex flex-row justify-between w-full text-lg`}>
                     <div className="userItem">Since</div>
-                    <div className="userContent">2022-07-04T16:01:46Z</div>
+                    <div className="userContent">{since}</div>
                 </div>
             </div>
 
             {/* Twitter */}
             {
-                !twitter
+                twitter
                 &&
                 <div className="userProfileContent p-3 w-full">
                     <div className={`${profileClassName} flex flex-row justify-between w-full text-lg`}>
                         <div className="userItem">Twitter</div>
-                        <div className="userContent">maxd_dev</div>
+                        <div className="userContent">{twitter}</div>
                     </div>
                 </div>
             }
 
             {/* Location */}
             {
-                !location
+                location
                 &&
                 <div className="userProfileContent p-3 w-full">
                     <div className={`${profileClassName} flex flex-row justify-between w-full text-lg`}>
                         <div className="userItem">Location</div>
-                        <div className="userContent">Portugal, Alcobaça</div>
+                        <div className="userContent">{location}</div>
                     </div>
                 </div>
             }
 
             {/* company */}
             {
-                !company
+                company
                 &&
                 <div className="userProfileContent p-3 w-full">
                     <div className={`${profileClassName} flex flex-row justify-between w-full text-lg`}>
                         <div className="userItem">Company</div>
-                        <div className="userContent">innoTech</div>
+                        <div className="userContent">{company}</div>
                     </div>
                 </div>
             }

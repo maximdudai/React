@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import './App.css';
 
@@ -8,10 +9,17 @@ import DisplayProfile from './components/DisplayProfile/DisplayProfile';
 
 function App() {
 
-    const [profileName] = useState('');
+    const [findProfile] = useState('maximdudai');
+    const [user, setUser] = useState([]);
 
-    const onSearchChange = (name) => {
-        profileName(name);
+    useEffect(() => {
+        axios.get(`https://api.github.com/users/${findProfile}`)
+        .then((res) => setUser(res.data));
+    }, [findProfile]);
+
+    
+    const onSearchChange = (event) => {
+        findProfile(event.target.value);
     }
 
     return (
@@ -19,8 +27,19 @@ function App() {
         <Navbar />
         
         <SearchProfile searchChange={onSearchChange}/>   
+
         <div className='container flex justify-center'>
-            <DisplayProfile />     
+            <DisplayProfile 
+                img_url={user.avatar_url}
+                name={user.name}
+                id={user.id}
+                Followers={user.followers}
+                Following={user.following}
+                since={user.created_at}
+                twitter={user.twitter_username}
+                location={user.location}
+                company={user.company}
+            />     
         </div>
     </div>
     );
