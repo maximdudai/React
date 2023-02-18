@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
 import Navbar from './components/Navbar/Navbar';
@@ -6,59 +6,74 @@ import DisplayProfile from './components/DisplayProfile/DisplayProfile';
 import SearchProfile from './components/SearchProfile/SearchProfile';
 
 import './App.css';
+import SearchButton from './components/SearchProfile/SearchButton';
 
 
-function App() {
-    const [userName, setUserName] = useState('');
-    const [userData, setUserData] = useState([]);
-    const [errorMessage, setErrorMessage] = useState('');
+class App extends Component {
 
-    
-    function setProfileName(name) {
-        setUserName(name.target.value);
-        console.log(name.target.value);
+    constructor() {
+        super()
+        this.state = {
+            userName: 'maximdudai',
+            userData: [],
+            errorMessage: 'Please enter a name in the search box.'
+        }
+        this.onProfileSearch = this.onProfileSearch.bind(this);
     }
 
-    const onProfileSearch = async () => {
-        const profileData = await axios.get(`https://api.github.com/users/${userName}`)
-        setUserData(profileData);
+    componentDidMount() {
+        axios.get(`https://api.github.com/users/maximdudai`)
+        .then((res) => {
+            this.setState({userData: res.data});
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
+
+    setProfileName = (event) => {
+        this.setState({userName: event});
+    }
+
+    onKeyboardPressed = (e) => {
+        if(e === 'Enter') {
+            this.onProfileSearch();
+        }
     };
 
-    return (
-    <div className="App w-full flex flex-col justify-center items-center">
-        <Navbar />
-        <SearchProfile setFindProfile={setProfileName} btnGetUserData={onProfileSearch}/>  
-        {
-            !userData.length ?
-                <div className='card flex flex-col justify-between w-52 mt-5 h-1/2 bg-slate-600 p-2 rounded'>
-                    <div className='invalidProfileImage flex justify-center'>
-                        <img 
-                            className='img w-1/4'
-                            src='https://cdn-icons-png.flaticon.com/512/25/25231.png'
-                            alt='GitHub Logo'
-                        />
-                    </div>
+    onProfileSearch = () => {
+        if(!this.state.userName.length)
+            return;
 
-                    <div className='invalidProfileError text-center bg-slate-900 rounded mt-3'>
-                        <span className='text-white text-sm text-center uppercase'>{errorMessage}</span>
-                    </div>
-                </div>
-            :
-            <DisplayProfile 
-                img_url={userData?.avatar_url}
-                name={userData?.login}
-                id={userData?.id}
-                Followers={userData?.followers}
-                Following={userData?.following}
-                since={userData?.created_at}
-                twitter={userData?.twitter_username}
-                location={userData?.location}
-                company={userData?.company}
-            />
-        }
+        axios.get(`https://api.github.com/users/${this.state.userName}`)
+            .then((res) => {
+                this.setState({userData: res.data});
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
 
-    </div>
-    );
+    render() {
+        return (
+            <div className="App w-full flex flex-col justify-center items-center">
+                <Navbar />
+                <SearchProfile setFindProfile={(event) => this.setProfileName(event.target.value)}  onEnterPressed={(e) => this.onKeyboardPressed(e.key)}/>  
+                <SearchButton onButtonClicked={this.onProfileSearch}/>
+                <DisplayProfile 
+                    img_url={this.state.userData?.avatar_url}
+                    name={this.state.userData?.login}
+                    id={this.state.userData?.id}
+                    Followers={this.state.userData?.followers}
+                    Following={this.state.userData?.following}
+                    since={this.state.userData?.created_at}
+                    twitter={this.state.userData?.twitter_username}
+                    location={this.state.userData?.location}
+                    company={this.state.userData?.company}
+                />
+            </div>
+        )
+    }
 }
 
 export default App;

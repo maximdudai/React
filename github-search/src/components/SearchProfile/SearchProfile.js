@@ -1,9 +1,7 @@
 import React from "react";
 import '../../App.css';
 
-    // https://api.github.com/users/${name}
-
-const SearchProfile = ({setFindProfile, btnGetUserData}) => {
+const SearchProfile = ({setFindProfile, onEnterPressed}) => {
 
     return(
         <div className="searchProfile mt-10">
@@ -14,14 +12,8 @@ const SearchProfile = ({setFindProfile, btnGetUserData}) => {
                     type={'text'}
                     placeholder={'Ex: maximdudai'}
                     onChange={setFindProfile}
+                    onKeyDown={onEnterPressed}
                 />
-                <button
-                    type="submit"
-                    className="text-white px-12 py-2 text-md bg-slate-800 rounded mt-2"
-                    onClick={btnGetUserData}
-                >
-                    Search
-                </button>
             </div>
         </div>
     )

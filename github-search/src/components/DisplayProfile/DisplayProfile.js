@@ -2,11 +2,9 @@ import React from "react";
 
 const DisplayProfile = ({img_url, name, id, Followers, Following, since, twitter, location, company}) => {
 
-
     const profileClassName = 'bg-slate-600 p-2 rounded';
 
     return (
-        // https://avatars.githubusercontent.com/u/108686152?v=4
         <div className="userGitHubProfile w-full mt-5 flex flex-col justify-center items-center md: ">
 
             <div className="userProfileImage w-11/12 flex justify-center border-dashed border-2 border-slate-500 rounded">
@@ -19,7 +17,7 @@ const DisplayProfile = ({img_url, name, id, Followers, Following, since, twitter
 
             <div className="userProfileContent p-3 w-full">
                 <div className={`${profileClassName} flex flex-row justify-between w-full text-lg`}>
-                    <div className="userItem">Name</div>
+                    <div className="userItem">User</div>
                     <div className="userContent">{name}</div>
                 </div>
             </div>
