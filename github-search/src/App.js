@@ -16,7 +16,6 @@ class App extends Component {
         this.state = {
             userName: 'maximdudai',
             userData: [],
-            errorMessage: 'Please enter a name in the search box.'
         }
         this.onProfileSearch = this.onProfileSearch.bind(this);
     }
@@ -24,7 +23,9 @@ class App extends Component {
     componentDidMount() {
         axios.get(`https://api.github.com/users/maximdudai`)
         .then((res) => {
-            this.setState({userData: res.data});
+            this.setState({
+                userData: res.data
+            });
         })
         .catch((err) => {
             console.log(err);
@@ -47,7 +48,8 @@ class App extends Component {
 
         axios.get(`https://api.github.com/users/${this.state.userName}`)
             .then((res) => {
-                this.setState({userData: res.data});
+                const responseData = res.data;
+                this.setState({userData: responseData});
             })
             .catch((err) => {
                 console.log(err);
@@ -58,8 +60,12 @@ class App extends Component {
         return (
             <div className="App w-full flex flex-col justify-center items-center">
                 <Navbar />
-                <SearchProfile setFindProfile={(event) => this.setProfileName(event.target.value)}  onEnterPressed={(e) => this.onKeyboardPressed(e.key)}/>  
-                <SearchButton onButtonClicked={this.onProfileSearch}/>
+
+                <div className='searchElements mt-10 flex flex-row justify-center items-center w-1/3'>
+                    <SearchProfile setFindProfile={(event) => this.setProfileName(event.target.value)}  onEnterPressed={(e) => this.onKeyboardPressed(e.key)}/>  
+                    <SearchButton onButtonClicked={this.onProfileSearch}/>
+                </div>
+
                 <DisplayProfile 
                     img_url={this.state.userData?.avatar_url}
                     name={this.state.userData?.login}
@@ -71,6 +77,7 @@ class App extends Component {
                     location={this.state.userData?.location}
                     company={this.state.userData?.company}
                 />
+
             </div>
         )
     }

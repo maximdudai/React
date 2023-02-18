@@ -4,8 +4,7 @@ import '../../App.css';
 const SearchProfile = ({setFindProfile, onEnterPressed}) => {
 
     return(
-        <div className="searchProfile mt-10">
-
+        <div className="searchProfile mr-3">
             <div className="searchInput flex flex-col md:flex-row justify-center items-center">
                 <input 
                     className="bg-slate-600 text-white p-2 text-lg rounded"
