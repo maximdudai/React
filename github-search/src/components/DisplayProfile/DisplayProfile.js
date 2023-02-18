@@ -1,6 +1,6 @@
 import React from "react";
 
-const DisplayProfile = ({name, id, Followers, Following, since, twitter, location, company}) => {
+const DisplayProfile = ({img_url, name, id, Followers, Following, since, twitter, location, company}) => {
 
 
     const profileClassName = 'bg-slate-600 p-2 rounded';
@@ -12,7 +12,7 @@ const DisplayProfile = ({name, id, Followers, Following, since, twitter, locatio
             <div className="userProfileImage w-11/12 flex justify-center border-dashed border-2 border-slate-500 rounded">
                 <img 
                     className="p-2 w-10/12 rounded"
-                    src="https://avatars.githubusercontent.com/u/108686152?v=4"
+                    src={img_url}
                     alt="GitHub Profile"
                 />
             </div>
