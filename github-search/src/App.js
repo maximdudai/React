@@ -67,6 +67,7 @@ class App extends Component {
                 </div>
 
                 <DisplayProfile 
+                    bio={this.state.userData?.bio}
                     img_url={this.state.userData?.avatar_url}
                     name={this.state.userData?.login}
                     id={this.state.userData?.id}
