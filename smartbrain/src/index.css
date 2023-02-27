@@ -2,4 +2,10 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
+  background: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
 }
